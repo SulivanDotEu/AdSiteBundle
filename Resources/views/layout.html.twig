@@ -1,0 +1,37 @@
+{% extends  "::crud_admin.html.twig" %}
+
+{% block breadcrumb %}
+{{ parent() }}
+<li class="">AdSite</li>
+{% endblock %}
+
+
+{% block header %}
+    <div class="container">
+        <div class="row">
+        <div class="col-sm-6">
+        <h1>{% block header_title %}Régie publicitaire{% endblock %}</h1>
+        <p>{% block header_subtitle %}An overview of Bootstrap, how to download and use, basic templates and examples, and more.{% endblock %}</p>
+        </div>
+        <div class="col-sm-6 haf" style="">
+            <ul class="list-group haf">
+                <li class="list-group-item"><span class="glyphicon glyphicon-bullhorn"></span> Campagne
+                    <div class="pull-right"><span class="glyphicon glyphicon-chevron-right"></span>
+                    </div>
+                </li>
+                <li class="list-group-item"><span class="glyphicon glyphicon-fullscreen"></span> Format
+                    <div class="pull-right"><span class="glyphicon glyphicon-chevron-right"></span>
+                    </div></li>
+                <li class="list-group-item"><span class="glyphicon glyphicon-pushpin"></span> Ads
+                    <div class="pull-right"><span class="glyphicon glyphicon-chevron-right"></span>
+                    </div>
+                </li>
+                <li class="list-group-item"><span class="glyphicon glyphicon-comment"></span> Space
+                    <div class="pull-right"><span class="glyphicon glyphicon-chevron-right"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </div>
+{% endblock %}

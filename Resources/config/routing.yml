@@ -1,3 +1,13 @@
-walva_ad_site_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: WalvaAdSiteBundle:Default:index }
+walva_adsite_campagne:
+    resource: "@WalvaAdSiteBundle/Controller/CampagneController.php"
+    type:     annotation
+
+walva_adsite_ads:
+    resource: "@WalvaAdSiteBundle/Controller/AdsController.php"
+    type:     annotation
+
+walva_adsite_format:
+    resource: "@WalvaAdSiteBundle/Controller/FormatController.php"
+    type:     annotation
+
+

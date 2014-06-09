@@ -1,0 +1,8 @@
+walva_adsite_advertiser:
+    resource: "@WalvaAdSiteBundle/Controller/AdvertiserController.php"
+    type:     annotation
+
+walva_adsite_advertiser_campagne:
+    resource: "@WalvaAdSiteBundle/Controller/PublicCampagneController.php"
+    type:     annotation
+

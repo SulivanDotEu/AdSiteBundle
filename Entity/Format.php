@@ -42,6 +42,11 @@ class Format
      */
     private $width;
 
+    function __toString()
+    {
+        return ''.$this->getHeight().'x'.$this->getWidth();
+    }
+
 
     /**
      * Get id

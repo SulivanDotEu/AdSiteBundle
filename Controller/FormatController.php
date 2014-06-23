@@ -18,34 +18,42 @@ use Walva\AdSiteBundle\Form\FormatType;
 class FormatController extends Controller
 {
 
-function __construct() {
-    $this->setRoutes(array(
-        self::$ROUTE_INDEX_ADD => 'format_new',
-        self::$ROUTE_INDEX_INDEX => 'format',
-        self::$ROUTE_INDEX_DELETE => 'format_show',
-        self::$ROUTE_INDEX_EDIT => 'format_edit',
-        self::$ROUTE_INDEX_SHOW => 'format_show',
-    ));
+    function __construct()
+    {
+        $this->setRoutes(
+            array(
+                self::$ROUTE_INDEX_ADD => 'format_new',
+                self::$ROUTE_INDEX_INDEX => 'format',
+                self::$ROUTE_INDEX_DELETE => 'format_show',
+                self::$ROUTE_INDEX_EDIT => 'format_edit',
+                self::$ROUTE_INDEX_SHOW => 'format_show',
+            )
+        );
 
-    $this->setLayoutPath('WalvaAdSiteBundle:Format:layout.html.twig');
-    $this->setIndexPath("WalvaAdSiteBundle:Format:index.html.twig");
-    $this->setShowPath("WalvaAdSiteBundle:Format:show.html.twig");
-    $this->setEditPath("WalvaAdSiteBundle:Format:edit.html.twig");
+        $this->setLayoutPath('WalvaAdSiteBundle:Format:layout.html.twig');
+        $this->setIndexPath("WalvaAdSiteBundle:Format:index.html.twig");
+        $this->setShowPath("WalvaAdSiteBundle:Format:show.html.twig");
+        $this->setEditPath("WalvaAdSiteBundle:Format:edit.html.twig");
 
-    $this->setColumnsHeader(array(
-        "Id",
-        'Nom',
-        'Hauteur',
-        'Largeur',
-    ));
-}
+        $this->setColumnsHeader(
+            array(
+                "Id",
+                'Nom',
+                'Hauteur',
+                'Largeur',
+            )
+        );
+    }
 
-public function createEntity() {
+    public function createEntity()
+    {
         return new Format();
     }
 
-public function getRepository() {
+    public function getRepository()
+    {
         $em = $this->getDoctrine()->getManager();
+
         return $em->getRepository('WalvaAdSiteBundle:Format');
     }
 
@@ -61,6 +69,7 @@ public function getRepository() {
         return parent::indexAction();
 
     }
+
     /**
      * Creates a new Format entity.
      *
@@ -75,18 +84,22 @@ public function getRepository() {
     }
 
     /**
-    * Creates a form to create a Format entity.
-    *
-    * @param Format $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a Format entity.
+     *
+     * @param Format $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     public function createCreateForm(Format $entity)
     {
-        $form = $this->createForm(new FormatType(), $entity, array(
-            'action' => $this->generateUrl('format_create'),
-            'method' => 'POST',
-        ));
+        $form = $this->createForm(
+            new FormatType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('format_create'),
+                'method' => 'POST',
+            )
+        );
 
         $form->add('submit', 'submit', array('label' => 'Create'));
 
@@ -133,23 +146,28 @@ public function getRepository() {
     }
 
     /**
-    * Creates a form to edit a Format entity.
-    *
-    * @param Format $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Format entity.
+     *
+     * @param Format $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     public function createEditForm(Format $entity)
     {
-        $form = $this->createForm(new FormatType(), $entity, array(
-            'action' => $this->generateUrl('format_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
+        $form = $this->createForm(
+            new FormatType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('format_update', array('id' => $entity->getId())),
+                'method' => 'PUT',
+            )
+        );
 
         $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }
+
     /**
      * Edits an existing Format entity.
      *
@@ -162,6 +180,7 @@ public function getRepository() {
         return parent::updateAction($request, $id);
 
     }
+
     /**
      * Deletes a Format entity.
      *
@@ -170,7 +189,7 @@ public function getRepository() {
      */
     public function deleteAction(Request $request, $id)
     {
-return parent::deleteAction($request, $id);
+        return parent::deleteAction($request, $id);
 
     }
 
@@ -187,7 +206,6 @@ return parent::deleteAction($request, $id);
             ->setAction($this->generateUrl('format_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

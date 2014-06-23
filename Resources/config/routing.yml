@@ -11,3 +11,6 @@ walva_adsite_format:
     type:     annotation
 
 
+walva_adsite_space:
+    resource: "@WalvaAdSiteBundle/Controller/SpaceController.php"
+    type:     annotation

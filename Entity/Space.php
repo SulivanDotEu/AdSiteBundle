@@ -35,26 +35,18 @@ class Space
      */
     private $name;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="height", type="integer")
-     */
-    private $height;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="width", type="integer")
-     */
-    private $width;
 
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="format", type="object")
+     * @ORM\ManyToOne(targetEntity="Walva\AdSiteBundle\Entity\Format")
      */
     private $format;
+
+    function __toString()
+    {
+        return $this->getName();
+    }
 
 
     /**
@@ -111,52 +103,6 @@ class Space
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set height
-     *
-     * @param integer $height
-     * @return Space
-     */
-    public function setHeight($height)
-    {
-        $this->height = $height;
-    
-        return $this;
-    }
-
-    /**
-     * Get height
-     *
-     * @return integer 
-     */
-    public function getHeight()
-    {
-        return $this->height;
-    }
-
-    /**
-     * Set width
-     *
-     * @param integer $width
-     * @return Space
-     */
-    public function setWidth($width)
-    {
-        $this->width = $width;
-    
-        return $this;
-    }
-
-    /**
-     * Get width
-     *
-     * @return integer 
-     */
-    public function getWidth()
-    {
-        return $this->width;
     }
 
     /**

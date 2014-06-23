@@ -14,24 +14,30 @@
         <p>{% block header_subtitle %}An overview of Bootstrap, how to download and use, basic templates and examples, and more.{% endblock %}</p>
         </div>
         <div class="col-sm-6 haf" style="">
-            <ul class="list-group haf">
-                <li class="list-group-item"><span class="glyphicon glyphicon-bullhorn"></span>
-                    {{  path('') }}Campagne
+
+            <div class="list-group haf">
+                <a class="list-group-item" href="{{ path('adsite_campagne') }}"><span class="glyphicon glyphicon-bullhorn"></span>
+                    Campagne
                     <div class="pull-right"><span class="glyphicon glyphicon-chevron-right"></span>
                     </div>
-                </li>
-                <li class="list-group-item"><span class="glyphicon glyphicon-fullscreen"></span> Format
-                    <div class="pull-right"><span class="glyphicon glyphicon-chevron-right"></span>
-                    </div></li>
-                <li class="list-group-item"><span class="glyphicon glyphicon-pushpin"></span> Ads
+                </a>
+                <a class="list-group-item" href="{{ path('format') }}"><span class="glyphicon glyphicon-fullscreen"></span>
+                    Format
                     <div class="pull-right"><span class="glyphicon glyphicon-chevron-right"></span>
                     </div>
-                </li>
-                <li class="list-group-item"><span class="glyphicon glyphicon-comment"></span> Space
+                </a>
+
+                <a href="{{ path('adsite_ads') }}" class="list-group-item"><span class="glyphicon glyphicon-pushpin"></span>
+                    Ads
                     <div class="pull-right"><span class="glyphicon glyphicon-chevron-right"></span>
                     </div>
-                </li>
-            </ul>
+                </a>
+                <a href="{{ path('space') }}" class="list-group-item"><span class="glyphicon glyphicon-comment"></span>
+                    Space
+                    <div class="pull-right"><span class="glyphicon glyphicon-chevron-right"></span>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
     </div>

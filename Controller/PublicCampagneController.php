@@ -10,28 +10,28 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Walva\AdSiteBundle\Entity\Campagne;
 use Walva\AdSiteBundle\Form\CampagneType;
 
-
 /**
  * Campagne controller.
  *
  * @Route("/campagne")
  */
-class CampagneController extends Controller
+class PublicCampagneController extends Controller
 {
 
     function __construct() {
         $this->setRoutes(array(
-                self::$ROUTE_INDEX_ADD => 'adsite_campagne_new',
-                self::$ROUTE_INDEX_INDEX => 'adsite_campagne',
-                self::$ROUTE_INDEX_DELETE => 'adsite_campagne_show',
-                self::$ROUTE_INDEX_EDIT => 'adsite_campagne_edit',
-                self::$ROUTE_INDEX_SHOW => 'adsite_campagne_show',
+                self::$ROUTE_INDEX_ADD => 'advertiser_campagne_new',
+                self::$ROUTE_INDEX_INDEX => 'advertiser_campagne',
+                self::$ROUTE_INDEX_DELETE => 'advertiser_campagne_show',
+                self::$ROUTE_INDEX_EDIT => 'advertiser_campagne_edit',
+                self::$ROUTE_INDEX_SHOW => 'advertiser_campagne_show',
             ));
 
-        $this->setLayoutPath('WalvaAdSiteBundle:Campagne:layout.html.twig');
-        $this->setIndexPath("WalvaAdSiteBundle:Campagne:index.html.twig");
-        $this->setShowPath("WalvaAdSiteBundle:Campagne:show.html.twig");
-        $this->setEditPath("WalvaAdSiteBundle:Campagne:edit.html.twig");
+        $this->setLayoutPath('WalvaAdSiteBundle:Public/Campagne:layout.html.twig');
+        $this->setIndexPath("WalvaAdSiteBundle:Public/Campagne:index.html.twig");
+        $this->setShowPath("WalvaAdSiteBundle:Public/Campagne:show.html.twig");
+        $this->setEditPath("WalvaAdSiteBundle:Public/Campagne:edit.html.twig");
+        $this->setNewPath("WalvaAdSiteBundle:Public/Campagne:new.html.twig");
 
         $this->setColumnsHeader(array(
                 "Id",
@@ -50,9 +50,9 @@ class CampagneController extends Controller
     /**
      * Lists all Campagne entities.
      *
-     * @Route("/", name="adsite_campagne")
+     * @Route("/", name="advertiser_campagne")
      * @Method("GET")
-     * @Template()
+     * @Template("WalvaAdSiteBundle:Public/Campagne:index.html.twig")
      */
     public function indexAction()
     {
@@ -62,42 +62,13 @@ class CampagneController extends Controller
     /**
      * Creates a new Campagne entity.
      *
-     * @Route("/", name="adsite_campagne_create")
+     * @Route("/", name="advertiser_campagne_create")
      * @Method("POST")
-     * @Template("WalvaAdSiteBundle:Campagne:new.html.twig")
+     * @Template("WalvaAdSiteBundle:Public/Campagne:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = $this->createEntity();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
-        /* @var $form \Symfony\Component\Form\Form */
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-
-            // création de l'ACL
-            $aclProvider = $this->get('security.acl.provider');
-            $objectIdentity = ObjectIdentity::fromDomainObject($entity);
-            $acl = $aclProvider->createAcl($objectIdentity);
-
-            // retrouve l'identifiant de sécurité de l'utilisateur actuellement connecté
-            $securityContext = $this->get('security.context');
-            $user = $securityContext->getToken()->getUser();
-            $securityIdentity = UserSecurityIdentity::fromAccount($user);
-
-            // donne accès au propriétaire
-            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
-            $aclProvider->updateAcl($acl);
-
-            return $this->redirect($this->generateUrl(
-                    $this->getRouteShow(), array('id' => $entity->getId())));
-        }
-
-        return $this->redirect($this->generateUrl(
-                $this->getRouteAdd(), array('id' => $entity->getId())));
+        return parent::createAction($request);
 
     }
 
@@ -111,7 +82,7 @@ class CampagneController extends Controller
     public function createCreateForm(Campagne $entity)
     {
         $form = $this->createForm(new CampagneType(), $entity, array(
-                'action' => $this->generateUrl('adsite_campagne_create'),
+                'action' => $this->generateUrl('advertiser_campagne_create'),
                 'method' => 'POST',
             ));
 
@@ -123,7 +94,7 @@ class CampagneController extends Controller
     /**
      * Displays a form to create a new Campagne entity.
      *
-     * @Route("/new", name="adsite_campagne_new")
+     * @Route("/new", name="advertiser_campagne_new")
      * @Method("GET")
      * @Template()
      */
@@ -133,13 +104,10 @@ class CampagneController extends Controller
 
     }
 
-
-
-
     /**
      * Finds and displays a Campagne entity.
      *
-     * @Route("/{id}", name="adsite_campagne_show")
+     * @Route("/{id}", name="advertiser_campagne_show")
      * @Method("GET")
      * @Template()
      */
@@ -152,7 +120,7 @@ class CampagneController extends Controller
     /**
      * Displays a form to edit an existing Campagne entity.
      *
-     * @Route("/{id}/edit", name="adsite_campagne_edit")
+     * @Route("/{id}/edit", name="advertiser_campagne_edit")
      * @Method("GET")
      * @Template()
      */
@@ -172,7 +140,7 @@ class CampagneController extends Controller
     public function createEditForm(Campagne $entity)
     {
         $form = $this->createForm(new CampagneType(), $entity, array(
-                'action' => $this->generateUrl('adsite_campagne_update', array('id' => $entity->getId())),
+                'action' => $this->generateUrl('advertiser_campagne_update', array('id' => $entity->getId())),
                 'method' => 'PUT',
             ));
 
@@ -183,9 +151,9 @@ class CampagneController extends Controller
     /**
      * Edits an existing Campagne entity.
      *
-     * @Route("/{id}", name="adsite_campagne_update")
+     * @Route("/{id}", name="advertiser_campagne_update")
      * @Method("PUT")
-     * @Template("WalvaAdSiteBundle:Campagne:edit.html.twig")
+     * @Template("WalvaAdSiteBundle:Public/Campagne:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -195,7 +163,7 @@ class CampagneController extends Controller
     /**
      * Deletes a Campagne entity.
      *
-     * @Route("/{id}", name="adsite_campagne_delete")
+     * @Route("/{id}", name="advertiser_campagne_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -214,7 +182,7 @@ class CampagneController extends Controller
     public function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('adsite_campagne_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('advertiser_campagne_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class CampagneType extends AbstractType
+class SpaceType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,14 +15,9 @@ class CampagneType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('website')
             ->add('name')
-            ->add('creationDate')
-            ->add('editionDate')
-            ->add('owner')
-            ->add('spaces', 'entity', array(
-                    'expanded' => true,
-                    'class' => 'Walva\AdSiteBundle\Entity\Space'
-                ))
+            ->add('format')
         ;
     }
     
@@ -32,7 +27,7 @@ class CampagneType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Walva\AdSiteBundle\Entity\Campagne'
+            'data_class' => 'Walva\AdSiteBundle\Entity\Space'
         ));
     }
 
@@ -41,6 +36,6 @@ class CampagneType extends AbstractType
      */
     public function getName()
     {
-        return 'walva_adsitebundle_campagne';
+        return 'walva_adsitebundle_space';
     }
 }

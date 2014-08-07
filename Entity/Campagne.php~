@@ -1,0 +1,84 @@
+<?php
+
+namespace Walva\AdSiteBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Campagne
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Walva\AdSiteBundle\Entity\CampagneRepository")
+ * @ORM\HasLifecycleCallbacks()
+ */
+class Campagne
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="creationDate", type="datetime")
+     */
+    private $creationDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="editionDate", type="datetime")
+     */
+    private $editionDate;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\ManyToOne(targetEntity="Walva\UserBundle\Entity\User")
+     */
+    private $owner;
+
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\OneToMany(targetEntity="Walva\AdSiteBundle\Entity\Ads", mappedBy="campagne")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $ads;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\OneToOne(targetEntity="Walva\AdSiteBundle\Entity\Format")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $format;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist(){
+        $this->setCreationDate(new \DateTime('NOW'));
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate(){
+        $this->setEditionDate(new \DateTime('NOW'));
+    }
+
+}

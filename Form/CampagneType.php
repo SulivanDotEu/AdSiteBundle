@@ -15,13 +15,21 @@ class CampagneType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('creationDate')
-            ->add('editionDate')
-            ->add('owner')
-            ->add('spaces', 'entity', array(
-                    'expanded' => true,
-                    'class' => 'Walva\AdSiteBundle\Entity\Space'
+            ->add('name', null, array(
+                    'label' => 'form.campagne.labels.name'
+                ))
+            ->add('creationDate', null, array(
+                    'label' => 'form.campagne.labels.creationDate'
+                ))
+            ->add('editionDate', null, array(
+                    'label' => 'form.campagne.labels.editionDate'
+                ))
+            ->add('owner', null, array(
+                    'label' => 'form.campagne.labels.owner'
+                ))
+            ->add('format', 'entity', array(
+                    'class' => 'Walva\AdSiteBundle\Entity\Format',
+                    'label' => 'form.campagne.labels.format'
                 ))
         ;
     }

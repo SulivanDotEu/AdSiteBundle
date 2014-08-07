@@ -2,26 +2,132 @@
 
 
 {% block content %}
-    <div class="container">
-        <div class="page-header">
-            <h1>Créer une campagne publicitaire en quelques étapes !</h1>
-        </div>
-        <p class="lead"> <code>padding-top: 60px;</code> on the <code>body > .container</code>.</p>
-        <p>Back to <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>
+    {#<div class="container">#}
+    {#<div class="page-header">#}
+    {#<h1>Créer une campagne publicitaire en quelques étapes !</h1>#}
+    {#</div>#}
+    {#<p class="lead"><code>padding-top: 60px;</code> on the <code>body > .container</code>.</p>#}
 
-        <div class="row text-center">
-            <div class="col-md-4 text-center">
-                <h2>1. Créer une <a href="#">campagne</a></h2>
-                <p class="lead">Définissez le nombre de clic ou le nombre de vue, activez ou désactivez votre campagne quand bon vous semble.</p>
+    {#<p>Back to <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>#}
+
+    {#<div class="row text-center">#}
+    {#<div class="col-md-3 text-center">#}
+    {#<h2>1. Créer une <a href="#">campagne</a></h2>#}
+
+    {#<p class="lead">Définissez le nombre de clic ou le nombre de vue, activez ou désactivez votre campagne#}
+    {#quand bon vous semble.</p>#}
+    {#</div>#}
+    {#<div class="col-md-3"><h2>2. Choissisez les <a href="#">emplacements</a> sur notre site.</h2>#}
+
+    {#<p class="lead">Définissez le nombre de clic ou le nombre de vue, activez ou désactivez votre campagne#}
+    {#quand bon vous semble.</p>#}
+    {#</div>#}
+    {#<div class="col-md-3">#}
+    {#<h2>3. Uploader vos <a href="#">publicités</a> dans les langues de votre chois</h2>#}
+
+    {#<p class="lead">Définissez le nombre de clic ou le nombre de vue, activez ou désactivez votre campagne#}
+    {#quand bon vous semble.</p>#}
+    {#</div>#}
+    {#<div class="col-md-3">#}
+    {#<h2>4. Démarrer votre campagne</h2>#}
+
+    {#<p class="lead">Quand vous êtes prêt, démarrer votre campagne sur notre site et gardez un oeil à tout#}
+    {#moment sur son avancement.#}
+    {#</p>#}
+    {#</div>#}
+    {#</div>#}
+    {#</div>#}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>1. Créer une <a href="{{ path("advertiser_campagne") }}">campagne</a></h2>
+
+                <p class="lead ">Définissez le nombre de clic ou le nombre de vue, activez ou désactivez votre campagne
+                    quand bon vous semble.</p>
             </div>
-            <div class="col-md-4"><h2>2. Choissisez les <a href="#">emplacements</a> sur notre site.</h2>
-                <p class="lead">Définissez le nombre de clic ou le nombre de vue, activez ou désactivez votre campagne quand bon vous semble.</p>
+            <div class="col-sm-4">
+                <div class="hidden-xs" style="padding-top: 33px"></div>
+                <ul class="list-unstyled">
+                    <li><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span> La liste de vos
+                        campagnes.
+                    </li>
+                    <li><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span> 0 campagnes en cours
+                        de création.
+                    </li>
+                    <li class="text-error" style="color: #ff0000"><span class="glyphicon glyphicon-exclamation-sign"
+                                                                        style=""></span> 2 actions requises.
+                    </li>
+                    <li class="text-success" style="color: #5cb85c"><span class="glyphicon glyphicon-ok-sign"
+                                                                        style=""></span> 0 actions requises.
+                    </li>
+                </ul>
             </div>
-            <div class="col-md-4">
-                <h2>3. Uploader vos <a href="#">publicités</a> dans les langues de votre chois</h2>
-                <p class="lead">Définissez le nombre de clic ou le nombre de vue, activez ou désactivez votre campagne quand bon vous semble.</p>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>2. Choissisez les <a href="#">emplacements</a> sur notre site.</h2>
+
+                <p class="lead">Définissez le nombre de clic ou le nombre de vue, activez ou désactivez votre campagne
+                    quand bon vous semble.</p>
+
+                <p>Pour cela, choississez la <a href="{{ path('advertiser_campagne') }}">campagne</a> pour laquelle vous
+                    voulez choisir les emplacements,
+                    et modifiez la en cliquant sur le bouton edit.
+                    <a href="#" class="btn btn-default btn-sm disabled">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        Edit</a>
+                </p>
+            </div>
+            <div class="col-sm-4">
+                <div class="hidden-xs" style="padding-top: 33px"></div>
+                <ul class="list-unstyled">
+                    <li><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span> La liste de nos emplacements.</li>
+                    <li><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span> La liste de nos formats supportés.</li>
+                    <li><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span> Nous proposons à ce jour X emplacements.</li>
+                    <li><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span> Nous supportons à ce jour X format.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>3. Uploader vos <a href="#">publicités</a> dans les langues de votre choix</h2>
+                <p class="lead"><a href="#">Importer</a> simplement vos publicités dans notre système via le bouton
+                    <a href="#" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Créer une publicité</a>,
+                    et assignés les à vos campagnes.</p>
+            </div>
+            <div class="col-sm-4">
+                <div class="hidden-xs" style="padding-top: 33px"></div>
+                <ul class="list-unstyled">
+                    <li><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span> La liste de vos publicités.</li>
+                    <li><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span> Vous avez 0 publicités.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>4. Démarrer votre campagne</h2>
+
+                <p class="lead">Définissez le nombre de clic ou le nombre de vue, activez ou désactivez votre campagne
+                    quand bon vous semble.</p>
+            </div>
+            <div class="col-sm-4">
+                <div class="hidden-xs" style="padding-top: 33px"></div>
+                <ul class="list-unstyled">
+                    <li><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span> La liste de vos campagnes</li>
+                    <li style="color: #5cb85c"><span class="glyphicon glyphicon-ok-sign"></span> 1 campagnes en cours</li>
+                    <li class="text-error" style="color: #ff0000">
+                        <span class="glyphicon glyphicon-exclamation-sign" style=""></span> 0 campagnes en cours.
+                    </li>
+                    <li><span class="glyphicon glyphicon-exclamation-sign" style="color: #428bca"></span> 0 campagnes terminées</li>
+
+                </ul>
             </div>
         </div>
     </div>
+
+
 
 {% endblock content %}

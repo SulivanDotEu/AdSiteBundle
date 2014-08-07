@@ -3,6 +3,7 @@
 namespace Walva\AdSiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Campagne
@@ -46,16 +47,10 @@ class Campagne
     /**
      * @var \stdClass
      *
-     * @ORM\ManyToMany(targetEntity="Walva\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Walva\UserBundle\Entity\User")
      */
     private $owner;
 
-    /**
-     * @var \stdClass
-     *
-     * @ORM\ManyToMany(targetEntity="Walva\AdSiteBundle\Entity\Space")
-     */
-    private $spaces;
 
     /**
      * @var \stdClass
@@ -64,6 +59,14 @@ class Campagne
      * @ORM\JoinColumn(nullable=true)
      */
     private $ads;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\OneToOne(targetEntity="Walva\AdSiteBundle\Entity\Format")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $format;
 
     /**
      * @ORM\PrePersist
@@ -79,6 +82,17 @@ class Campagne
         $this->setEditionDate(new \DateTime('NOW'));
     }
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ads = new \Doctrine\Common\Collections\ArrayCollection();
+        $date = new \DateTime('NOW');
+        $dateHumaine = $date->format("d/m/Y");
+        $this->setName('Campagne du '.$dateHumaine);
+    }
+    
     /**
      * Get id
      *
@@ -110,29 +124,6 @@ class Campagne
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set owner
-     *
-     * @param \stdClass $owner
-     * @return Campagne
-     */
-    public function setOwner($owner)
-    {
-        $this->owner = $owner;
-    
-        return $this;
-    }
-
-    /**
-     * Get owner
-     *
-     * @return \stdClass 
-     */
-    public function getOwner()
-    {
-        return $this->owner;
     }
 
     /**
@@ -182,48 +173,81 @@ class Campagne
     }
 
     /**
-     * Set spaces
+     * Set owner
      *
-     * @param \stdClass $spaces
+     * @param \Walva\UserBundle\Entity\User $owner
      * @return Campagne
      */
-    public function setSpaces($spaces)
+    public function setOwner(\Walva\UserBundle\Entity\User $owner = null)
     {
-        $this->spaces = $spaces;
+        $this->owner = $owner;
     
         return $this;
     }
 
     /**
-     * Get spaces
+     * Get owner
      *
-     * @return \stdClass 
+     * @return \Walva\UserBundle\Entity\User 
      */
-    public function getSpaces()
+    public function getOwner()
     {
-        return $this->spaces;
+        return $this->owner;
     }
 
     /**
-     * Set ads
+     * Add ads
      *
-     * @param \stdClass $ads
+     * @param \Walva\AdSiteBundle\Entity\Ads $ads
      * @return Campagne
      */
-    public function setAds($ads)
+    public function addAd(\Walva\AdSiteBundle\Entity\Ads $ads)
     {
-        $this->ads = $ads;
+        $this->ads[] = $ads;
     
         return $this;
+    }
+
+    /**
+     * Remove ads
+     *
+     * @param \Walva\AdSiteBundle\Entity\Ads $ads
+     */
+    public function removeAd(\Walva\AdSiteBundle\Entity\Ads $ads)
+    {
+        $this->ads->removeElement($ads);
     }
 
     /**
      * Get ads
      *
-     * @return \stdClass 
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getAds()
     {
         return $this->ads;
+    }
+
+    /**
+     * Set format
+     *
+     * @param \Walva\AdSiteBundle\Entity\Format $format
+     * @return Campagne
+     */
+    public function setFormat(\Walva\AdSiteBundle\Entity\Format $format = null)
+    {
+        $this->format = $format;
+    
+        return $this;
+    }
+
+    /**
+     * Get format
+     *
+     * @return \Walva\AdSiteBundle\Entity\Format 
+     */
+    public function getFormat()
+    {
+        return $this->format;
     }
 }

@@ -19,7 +19,7 @@ class CampagneControllerTest extends WebTestCase
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'walva_adsitebundle_campagnetype[field_name]'  => 'Test',
+            'walva_adsitebundle_campagne[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class CampagneControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Edit')->form(array(
-            'walva_adsitebundle_campagnetype[field_name]'  => 'Foo',
+            'walva_adsitebundle_campagne[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

@@ -1,0 +1,9 @@
+form:
+  campagne:
+    labels:
+      name : "Nom"
+      creationDate : "Date de création"
+      editionDate : "Date d'édition"
+      owner : "Propriétaire"
+      spaces : "Espace"
+      format : "Format"

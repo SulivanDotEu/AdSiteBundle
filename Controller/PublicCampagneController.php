@@ -10,7 +10,25 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Walva\AdSiteBundle\Entity\Campagne;
 use Walva\AdSiteBundle\Form\CampagneType;
 
+/*
+ *             // création de l'ACL
+            $aclProvider = $this->get('security.acl.provider');
+            $objectIdentity = ObjectIdentity::fromDomainObject($entity);
+            $acl = $aclProvider->createAcl($objectIdentity);
+
+            // retrouve l'identifiant de sécurité de l'utilisateur actuellement connecté
+            $securityContext = $this->get('security.context');
+            $user = $securityContext->getToken()->getUser();
+            $securityIdentity = UserSecurityIdentity::fromAccount($user);
+
+            // donne accès au propriétaire
+            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
+            $aclProvider->updateAcl($acl);
+
+ */
+
 /**
+ *
  * Campagne controller.
  *
  * @Route("/campagne")
@@ -86,6 +104,10 @@ class PublicCampagneController extends Controller
                 'method' => 'POST',
             ));
 
+        $form->remove("creationDate");
+        $form->remove("editionDate");
+        $form->remove("owner");
+
         $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
@@ -100,7 +122,15 @@ class PublicCampagneController extends Controller
      */
     public function newAction()
     {
-        return parent::newAction();
+        $entity = $this->createEntity();
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $entity->setOwner($user);
+        $form = $this->createCreateForm($entity);
+        $params = $this->getRenderParams();
+        $params['form'] = $form->createView();
+        $params['entity'] = $entity;
+
+        return $this->renderNewAction($params);
 
     }
 

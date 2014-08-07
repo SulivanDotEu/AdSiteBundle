@@ -19,12 +19,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  *
  * @Route("/")
  */
-class AdvertiserController extends Controller{
-
+class AdvertiserController extends Controller
+{
 
 
     /**
-     * Lists all Format entities.
+     * First page when you log as an advertiser.
      *
      * @Route("/", name="advertiser_index")
      * @Method("GET")
@@ -32,8 +32,46 @@ class AdvertiserController extends Controller{
      */
     public function indexAction()
     {
-        return $this->render('@WalvaAdSite/Advertiser/index.html.twig');
 
+        return $this->render('@WalvaAdSite/Advertiser/index.html.twig');
     }
 
-} 
+    /**
+     * Lists all Spaces available for adverstiser.
+     *
+     * @Route("/spaces", name="advertiser_spaces")
+     * @Method("GET")
+     * @Template()
+     */
+    public function listSpacesAction()
+    {
+        $spaces = $this->getDoctrine()->getRepository('WalvaAdSiteBundle:Space')->findAll();
+
+        return $this->render(
+            '@WalvaAdSite/Advertiser/spaces.html.twig',
+            array(
+                'entities' => $spaces
+            )
+        );
+    }
+
+    /**
+     * Lists all Spaces available for adverstiser.
+     *
+     * @Route("/format", name="advertiser_format")
+     * @Method("GET")
+     * @Template()
+     */
+    public function listFormatsAction()
+    {
+        $entities = $this->getDoctrine()->getRepository('WalvaAdSiteBundle:Format')->findAll();
+
+        return $this->render(
+            '@WalvaAdSite/Advertiser/format.html.twig',
+            array(
+                'entities' => $entities
+            )
+        );
+    }
+
+}

@@ -3,6 +3,7 @@
 namespace Walva\AdSiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Walva\HafBundle\Entity\Image;
 
 /**
  * Space
@@ -42,6 +43,18 @@ class Space
      * @ORM\ManyToOne(targetEntity="Walva\AdSiteBundle\Entity\Format")
      */
     private $format;
+
+    /**
+     * @var Image
+     * @ORM\OneToOne(targetEntity="Walva\HafBundle\Entity\Image", cascade={"all"})
+     */
+    private $image;
+
+    /**
+     * @var SpaceExample
+     * @ORM\OneToMany(targetEntity="Walva\AdSiteBundle\Entity\SpaceExample", mappedBy="space")
+     */
+    private $examples;
 
     function __toString()
     {
@@ -108,7 +121,7 @@ class Space
     /**
      * Set format
      *
-     * @param \stdClass $format
+     * @param Format $format
      * @return Space
      */
     public function setFormat($format)
@@ -121,10 +134,67 @@ class Space
     /**
      * Get format
      *
-     * @return \stdClass 
+     * @return Format
      */
     public function getFormat()
     {
         return $this->format;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+    }
+
+    /**
+     * @param \Walva\HafBundle\Entity\Image $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return \Walva\HafBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+
+
+    /**
+     * Add examples
+     *
+     * @param \Walva\AdSiteBundle\Entity\SpaceExample $examples
+     * @return Space
+     */
+    public function addExample(\Walva\AdSiteBundle\Entity\SpaceExample $examples)
+    {
+        $this->examples[] = $examples;
+    
+        return $this;
+    }
+
+    /**
+     * Remove examples
+     *
+     * @param \Walva\AdSiteBundle\Entity\SpaceExample $examples
+     */
+    public function removeExample(\Walva\AdSiteBundle\Entity\SpaceExample $examples)
+    {
+        $this->examples->removeElement($examples);
+    }
+
+    /**
+     * Get examples
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getExamples()
+    {
+        return $this->examples;
     }
 }

@@ -1,20 +1,67 @@
 {% extends  'WalvaCrudAdminBundle:Crud:show.html.twig' %}
+{# entity \Walva\AdSiteBundle\Entity\Campagne #}
 
-{% block crud_table_body -%}
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ entity.name }}</td>
-            </tr>
-            <tr>
-                <th>Creationdate</th>
-                <td>{{ entity.creationDate|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Editiondate</th>
-                <td>{{ entity.editionDate|date('Y-m-d H:i:s') }}</td>
-            </tr>
+{% block body %}
+
+    {% block crud_top_button %}
+        <div style="padding-bottom: 10px;">
+            <div class="pull-right" style="padding-bottom: 10px;">
+
+                <div class="btn-group">
+                    <a href="{{ path(routeIndex) }}" class="btn btn-default btn">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        Back to the list
+                    </a>
+                    <a href="{{ path(routeEdit, { 'id': entity.id }) }}" class="btn btn-default btn"><span
+                                class="glyphicon glyphicon-pencil"></span> Edit</a>
+                    <!--<a href="{{ path(routeEdit, { 'id': entity.id }) }}" class="btn btn-default btn"><span
+                                class="glyphicon glyphicon-remove"></span> Delete</a>-->
+                </div>
+
+            </div>
+
+            <h1>{{ entity.name }}</h1>
+
+
+        </div>
+    {% endblock %}
+
+    <table class="table table-stripped">
+        <tbody>
+        <tr>
+            <th>{{ 'Identifiant unique'|trans }}</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'Nom'|trans }}</th>
+            <td>{{ entity.name }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'Date de création'|trans }}</th>
+            <td>{{ entity.creationDate|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'Format'|trans }}</th>
+            <td>{{ entity.format }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'Espaces publicitaires'|trans }}</th>
+            <td>
+                {% for space in entity.spaces %}
+                <a class="btn btn-xs btn-success disabled" href="#">{{ space }}</a>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ 'Dernière mise à jour'|trans }}
+            </th>
+            <td>
+                {% if entity.editionDate is not null %}
+                {{ entity.editionDate|date('Y-m-d H:i:s') }}
+                {% endif %}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
 {% endblock %}

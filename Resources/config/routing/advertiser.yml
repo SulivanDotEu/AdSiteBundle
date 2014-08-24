@@ -6,3 +6,8 @@ walva_adsite_advertiser_campagne:
     resource: "@WalvaAdSiteBundle/Controller/PublicCampagneController.php"
     type:     annotation
 
+
+walva_adsite_advertiser_space:
+    resource: "@WalvaAdSiteBundle/Controller/PublicSpaceController.php"
+    type:     annotation
+

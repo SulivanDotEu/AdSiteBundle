@@ -50,6 +50,13 @@ class Ads
      */
     private $source;
 
+    /**
+     * @var \stdClass
+     *
+     * @ORM\ManyToOne(targetEntity="Walva\UserBundle\Entity\User")
+     */
+    private $owner;
+
 
     /**
      * Get id
@@ -151,5 +158,28 @@ class Ads
     public function getSource()
     {
         return $this->source;
+    }
+
+    /**
+     * Set owner
+     *
+     * @param \Walva\UserBundle\Entity\User $owner
+     * @return Campagne
+     */
+    public function setOwner(\Walva\UserBundle\Entity\User $owner = null)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return \Walva\UserBundle\Entity\User
+     */
+    public function getOwner()
+    {
+        return $this->owner;
     }
 }

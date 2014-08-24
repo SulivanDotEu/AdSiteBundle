@@ -1,0 +1,49 @@
+{% extends  '@WalvaAdSite/Public/Campagne/layout.html.twig' %}
+
+{% block crud_top_button %}
+    <div style="padding-bottom: 44px;">
+        <div class="pull-left" style="padding-bottom: 10px;">
+            <a href="{{ path(routeIndex) }}" class="btn btn-default">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                Back to the list
+            </a>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block body -%}
+
+    <div class="row">
+        <div class="col-xs-6">
+            <h1>Formulaire de création de campagne : selection des espaces publicitaires</h1>
+            <hr>
+
+            {{ form(form) }}
+
+        </div>
+        <div class="col-xs-6">
+            {% set spaces_content_light = true %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>Liste des espaces compatibles avec le format de votre campagne.</h1>
+                    <hr>
+                    <dl class="dl-horizontal">
+                        {% for entity in spaces %}
+
+                            <dt>{{ entity.name }}</dt>
+                            <dd>{{ entity.format }}</dd>
+                        {% endfor %}
+                    </dl>
+                    <div class="alert alert-info" role="alert"><strong>Formats et espaces publicitaires</strong> Pour
+                        information, Il nous est possible de vous proposer d'avantage
+                        de formats et d'espaces publicitaires sur notre site. Pour cela, n'hésitez pas à nous
+                        <a href="{{ path('haf_contact', {'langue' : 'fr'}) }}">contacter</a>.
+                    </div>
+                </div>
+            </div>
+            {{ include('@WalvaAdSite/Advertiser/spaces_content.html.twig') }}
+        </div>
+    </div>
+
+{% endblock %}

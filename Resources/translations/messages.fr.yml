@@ -1,9 +1,14 @@
-form:
-  campagne:
-    labels:
-      name : "Nom"
-      creationDate : "Date de création"
-      editionDate : "Date d'édition"
-      owner : "Propriétaire"
-      spaces : "Espace"
-      format : "Format"
+form.campagne.labels.name: Nom
+form.campagne.labels.creationDate: 'Date de création'
+form.campagne.labels.editionDate: 'Date d''édition'
+form.campagne.labels.owner: Propriétaire
+form.campagne.labels.spaces: Espace
+form.campagne.labels.format: Format
+Numero: Numéro
+Show: Afficher
+Edit: Mofidier
+'Identifiant unique': 'Identifiant unique'
+Nom: Nom
+'Date de création': 'Date de création'
+'Dernière mise à jour': 'Dernière mise à jour'
+'Espaces publicitaires': 'Espaces publicitaires'

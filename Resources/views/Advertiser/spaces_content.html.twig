@@ -1,0 +1,77 @@
+{% if spaces_content_light is not defined %}
+    {% set spaces_content_light = false %}
+{% endif %}
+
+
+
+{#<div class="row">#}
+    {#<div class="col-sm-4">#}
+    {#<h3><span class="glyphicon glyphicon-info-sign"></span> A voir aussi</h3>#}
+    {#<p></p>#}
+    {#</div>#}
+    {#</div>#}
+<hr>
+<div class="row">
+
+    {% for entity in spaces %}
+    {% if spaces_content_light == false %}
+    <div class="col-sm-6">
+        {% else %}
+        <div class="col-xs-12">
+            {% endif %}
+
+
+
+            <h3>{{ entity.name }}</h3>
+
+            <div class="row">
+                <div class="col-xs-6">
+                    {% if entity.image is not null %}
+                        <img class="img-thumbnail" style="max-height: 400px;"
+                             src="{{ asset(entity.image.webPath) }}"
+                             alt="{{ entity.image.alt }}"/>
+                    {% else %}
+                        <img data-src="holder.js/100%x100" alt="...">
+                    {% endif %}
+
+
+                </div>
+                <div class="col-xs-6">
+
+                    <dl class="">
+
+                        <dt>Format</dt>
+                        <dd>{{ entity.format.name }} ({{ entity.format }})</dd>
+
+                        {% if (entity.examples|length > 0) %}
+                            <dt>Examples</dt>
+                            <dd>{% for example in entity.examples %}
+                                <a href="{{ example.url }}">
+                                    Lien n°{{ loop.index }}</a>{% if loop.last == false %},
+                                    {% endif %}
+
+
+                                {% endfor %}
+                            </dd>
+                        {% endif %}
+                        <dt>Prix</dt>
+                        <dd>
+                            <ul class="list-unstyled">
+                                <li>par clic : 1€</li>
+                                <li>par 1000 vues : 5€</li>
+                            </ul>
+                        </dd>
+
+                    </dl>
+
+                </div>
+            </div>
+
+
+        </div>
+        {% if loop.index % 2 == 0 %}
+            <div class="clearfix"></div>
+        {% endif %}
+        {% endfor %}
+    </div>
+

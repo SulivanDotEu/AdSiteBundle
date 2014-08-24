@@ -2,26 +2,56 @@
 
 {% block body %}
 
+
+    {% block crud_top_button %}
+        <div style="padding-bottom: 44px;">
+            <div class="pull-left" style="padding-bottom: 10px;">
+                <a href="{{ path(routeIndex) }}" class="btn btn-default">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    Back to the list
+                </a>
+            </div>
+
+        </div>
+    {% endblock %}
     <div class="row">
-        <div class="col-lg-12">
-
-            {% block crud_top_button %}
-                <div style="padding-bottom: 44px;">
-                    <div class="pull-left" style="padding-bottom: 10px;">
-                        <a href="{{ path(routeIndex) }}" class="btn btn-default">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                            Back to the list
-                        </a>
-                    </div>
-
-                </div>
-            {% endblock %}
+        <div class="col-sm-6">
+            <h1>Formulaire de création de campagne : données de bases</h1>
+            <hr>
 
             {{ form_start(form, { 'style': 'horizontal', 'col_size': 'sm'}) }}
             {{ form(form) }}
             {{ form_end(form) }}
 
             <hr>
+        </div>
+        <div class="col-sm-6">
+            <h2>Compléments d'informations</h2>
+            <hr>
+            <h4>Nom de votre campagne</h4>
+
+            <p>Le nom de votre campagne n'est visible que dans votre partie membre. Choississez la dénomination
+                qui vous convient pour facilement identifier les campagnes par rapport aux autres.
+                Celle-ci n'a pas d'autres importances, cependant elle ne peut être vide.
+            </p>
+            <h4>Format sélectionné pour votre campagne</h4>
+
+            <p>
+                Une campagne ne peut avoir qu'un seul format. Pour un même format, vous pouvez avoir plusieurs
+                emplacements sur le site web.
+            </p>
+
+            <p>
+                Par exemple pour le format 160x600, il y 2 emplacements : sur la page
+                <a href="http://www.healthandfood.fr/">principal du site</a> et sur la page de
+                <a href="http://www.healthandfood.fr/article/2265/show">chaque article</a>.
+            </p>
+
+            <p>
+                Si vous voulez placez d'autres de vos publicités sur notre site, il vous suffit de créer une autre
+                campagne.
+            </p>
+
         </div>
     </div>
 {% endblock %}

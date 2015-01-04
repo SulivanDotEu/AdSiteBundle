@@ -2,6 +2,7 @@
 
 namespace Walva\AdSiteBundle\Controller;
 
+use Doctrine\DBAL\Query\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use \Walva\CrudAdminBundle\Controller\CrudController as Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -60,9 +61,62 @@ class PublicCampagneController extends Controller
         return new Campagne();
     }
 
+    /**
+     * @return \Doctrine\Common\Persistence\ObjectRepository
+     */
     public function getRepository() {
         $em = $this->getDoctrine()->getManager();
         return $em->getRepository('WalvaAdSiteBundle:Campagne');
+    }
+
+    /**
+     *
+     * @param Campagne $campagne
+     * @Route("/{campagne}/select-spaces", name="adsite_public_select_spaces")
+     * @Method({"GET", "POST"})
+     *
+     *
+     */
+    public function selectSpacesAction(Request $request, Campagne $campagne){
+
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('WalvaAdSiteBundle:Space');
+        /** @var QueryBuilder $queryBuilder */
+        $queryBuilder = $repository->createQueryBuilder('s')
+            ->where('s.format = :format')
+            ->setParameter('format', $campagne->getFormat());
+//            ->getQuery();
+        $form = $this->createFormBuilder();
+        $form->add('spaces', 'entity', array(
+            'class' => "Walva\AdSiteBundle\Entity\Space",
+            'label' => 'form.campagne.labels.format',
+            'query_builder' => $queryBuilder,
+            'expanded' => true,
+            'multiple' => true,
+            'label' => "Espaces Publicitaires"
+        ));
+        $form->add('submit', 'submit', array('label' => 'Selectionner les espaces'));
+        $form->setAction($this->generateUrl('adsite_public_select_spaces', array('campagne' => $campagne->getId())));
+        $form->setMethod("POST");
+        $form = $form->getForm();
+        $form->handleRequest($request);
+
+        if($form->isValid()){
+            $selectedSpaces = $form->get('spaces')->getData();
+            foreach($selectedSpaces as $space){
+                $campagne->addSpace($space);
+                $em->persist($space);
+            }
+            $em->persist($campagne);
+            $em->flush();
+            return $this->redirect($this->generateUrl('advertiser_campagne_show', array('id' => $campagne->getId())));
+        }
+
+        return $this->render('@WalvaAdSite/Public/Campagne/selectSpaces.html.twig', array(
+            'form' => $form->createView(),
+            'spaces' => $repository->findByFormat($campagne->getFormat())
+        ));
+
     }
 
     /**
@@ -86,7 +140,22 @@ class PublicCampagneController extends Controller
      */
     public function createAction(Request $request)
     {
-        return parent::createAction($request);
+        $entity = $this->createEntity();
+        $form = $this->createCreateForm($entity);
+        $form->handleRequest($request);
+        /* @var $form \Symfony\Component\Form\Form */
+
+        if ($form->isValid()) {
+            $entity->setOwner($this->getUser());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+            return $this->redirect($this->generateUrl(
+                'walva_adsite_publiccampagne_selectspaces', array('campagne' => $entity->getId())));
+        }
+
+        return $this->redirect($this->generateUrl(
+            $this->getRouteAdd(), array('id' => $entity->getId())));
 
     }
 

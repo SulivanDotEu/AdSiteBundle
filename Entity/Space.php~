@@ -164,37 +164,4 @@ class Space
     }
 
 
-
-    /**
-     * Add examples
-     *
-     * @param \Walva\AdSiteBundle\Entity\SpaceExample $examples
-     * @return Space
-     */
-    public function addExample(\Walva\AdSiteBundle\Entity\SpaceExample $examples)
-    {
-        $this->examples[] = $examples;
-    
-        return $this;
-    }
-
-    /**
-     * Remove examples
-     *
-     * @param \Walva\AdSiteBundle\Entity\SpaceExample $examples
-     */
-    public function removeExample(\Walva\AdSiteBundle\Entity\SpaceExample $examples)
-    {
-        $this->examples->removeElement($examples);
-    }
-
-    /**
-     * Get examples
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getExamples()
-    {
-        return $this->examples;
-    }
 }

@@ -40,7 +40,7 @@ class Campagne
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="editionDate", type="datetime")
+     * @ORM\Column(name="editionDate", type="datetime", nullable=true)
      */
     private $editionDate;
 
@@ -63,10 +63,16 @@ class Campagne
     /**
      * @var \stdClass
      *
-     * @ORM\OneToOne(targetEntity="Walva\AdSiteBundle\Entity\Format")
+     * @ORM\ManyToOne(targetEntity="Walva\AdSiteBundle\Entity\Format")
      * @ORM\JoinColumn(nullable=true)
      */
     private $format;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Walva\AdSiteBundle\Entity\Space", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $spaces;
 
     /**
      * @ORM\PrePersist
@@ -92,7 +98,13 @@ class Campagne
         $dateHumaine = $date->format("d/m/Y");
         $this->setName('Campagne du '.$dateHumaine);
     }
-    
+
+    function __toString()
+    {
+        return $this->getName();
+    }
+
+
     /**
      * Get id
      *
@@ -249,5 +261,39 @@ class Campagne
     public function getFormat()
     {
         return $this->format;
+    }
+
+    /**
+     * Add spaces
+     *
+     * @param \Walva\AdSiteBundle\Entity\Space $spaces
+     * @return Campagne
+     */
+    public function addSpace(\Walva\AdSiteBundle\Entity\Space $spaces)
+    {
+        if($this->getSpaces()->contains($spaces)) return;
+        $this->spaces[] = $spaces;
+    
+        return $this;
+    }
+
+    /**
+     * Remove spaces
+     *
+     * @param \Walva\AdSiteBundle\Entity\Space $spaces
+     */
+    public function removeSpace(\Walva\AdSiteBundle\Entity\Space $spaces)
+    {
+        $this->spaces->removeElement($spaces);
+    }
+
+    /**
+     * Get spaces
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSpaces()
+    {
+        return $this->spaces;
     }
 }

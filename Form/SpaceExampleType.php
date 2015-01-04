@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SpaceType extends AbstractType
+class SpaceExampleType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,10 +15,8 @@ class SpaceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('website')
-            ->add('name')
-            ->add('format')
-        ->add("image")
+            ->add('url')
+        ->add('space')
         ;
     }
     
@@ -28,7 +26,7 @@ class SpaceType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Walva\AdSiteBundle\Entity\Space'
+            'data_class' => 'Walva\AdSiteBundle\Entity\SpaceExample'
         ));
     }
 
@@ -37,6 +35,6 @@ class SpaceType extends AbstractType
      */
     public function getName()
     {
-        return 'walva_adsitebundle_space';
+        return 'walva_adsitebundle_spaceexample';
     }
 }

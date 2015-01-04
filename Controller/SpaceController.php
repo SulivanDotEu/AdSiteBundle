@@ -18,35 +18,38 @@ use Walva\AdSiteBundle\Form\SpaceType;
 class SpaceController extends Controller
 {
 
-function __construct() {
-    $this->setRoutes(array(
-        self::$ROUTE_INDEX_ADD => 'space_new',
-        self::$ROUTE_INDEX_INDEX => 'space',
-        self::$ROUTE_INDEX_DELETE => 'space_show',
-        self::$ROUTE_INDEX_EDIT => 'space_edit',
-        self::$ROUTE_INDEX_SHOW => 'space_show',
-    ));
 
-    $this->setLayoutPath('WalvaAdSiteBundle:Space:layout.html.twig');
-    $this->setIndexPath("WalvaAdSiteBundle:Space:index.html.twig");
-    $this->setShowPath("WalvaAdSiteBundle:Space:show.html.twig");
-    $this->setEditPath("WalvaAdSiteBundle:Space:edit.html.twig");
-    $this->setNewPath("WalvaAdSiteBundle:Space:new.html.twig");
+    function __construct()
+    {
+        $this->setRoutes(array(
+            self::$ROUTE_INDEX_ADD => 'space_new',
+            self::$ROUTE_INDEX_INDEX => 'space',
+            self::$ROUTE_INDEX_DELETE => 'space_show',
+            self::$ROUTE_INDEX_EDIT => 'space_edit',
+            self::$ROUTE_INDEX_SHOW => 'space_show',
+        ));
 
-    $this->setColumnsHeader(array(
+        $this->setLayoutPath('WalvaAdSiteBundle:Space:layout.html.twig');
+        $this->setIndexPath("WalvaAdSiteBundle:Space:index.html.twig");
+        $this->setShowPath("WalvaAdSiteBundle:Space:show.html.twig");
+        $this->setEditPath("WalvaAdSiteBundle:Space:edit.html.twig");
+
+        $this->setColumnsHeader(array(
             "Id",
             "Name",
             "Website",
             "Format",
 
         ));
-}
+    }
 
-public function createEntity() {
+    public function createEntity()
+    {
         return new Space();
     }
 
-public function getRepository() {
+    public function getRepository()
+    {
         $em = $this->getDoctrine()->getManager();
         return $em->getRepository('WalvaAdSiteBundle:Space');
     }
@@ -63,6 +66,7 @@ public function getRepository() {
         return parent::indexAction();
 
     }
+
     /**
      * Creates a new Space entity.
      *
@@ -77,12 +81,12 @@ public function getRepository() {
     }
 
     /**
-    * Creates a form to create a Space entity.
-    *
-    * @param Space $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a Space entity.
+     *
+     * @param Space $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     public function createCreateForm(Space $entity)
     {
         $form = $this->createForm(new SpaceType(), $entity, array(
@@ -135,12 +139,12 @@ public function getRepository() {
     }
 
     /**
-    * Creates a form to edit a Space entity.
-    *
-    * @param Space $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Space entity.
+     *
+     * @param Space $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     public function createEditForm(Space $entity)
     {
         $form = $this->createForm(new SpaceType(), $entity, array(
@@ -152,6 +156,7 @@ public function getRepository() {
 
         return $form;
     }
+
     /**
      * Edits an existing Space entity.
      *
@@ -164,6 +169,7 @@ public function getRepository() {
         return parent::updateAction($request, $id);
 
     }
+
     /**
      * Deletes a Space entity.
      *
@@ -172,7 +178,7 @@ public function getRepository() {
      */
     public function deleteAction(Request $request, $id)
     {
-return parent::deleteAction($request, $id);
+        return parent::deleteAction($request, $id);
 
     }
 
@@ -189,7 +195,6 @@ return parent::deleteAction($request, $id);
             ->setAction($this->generateUrl('space_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

@@ -44,7 +44,11 @@
                 <h2>1. Créer une <a href="{{ path("advertiser_campagne") }}">campagne</a></h2>
 
                 <p class="lead ">Définissez le nombre de clic ou le nombre de vue, activez ou désactivez votre campagne
-                    quand bon vous semble.</p>
+                    quand bon vous semble. Cliquez ici pour créer une campagne :
+                    <a href="{{ path('advertiser_campagne_new') }}" class="btn btn-default">
+                        <span class="glyphicon glyphicon-plus"></span> Créer une campagne
+                    </a>
+                </p>
             </div>
             <div class="col-sm-4">
                 <div class="hidden-xs" style="padding-top: 33px"></div>
@@ -66,7 +70,7 @@
         </div>
         <div class="row">
             <div class="col-sm-8">
-                <h2>2. Choissisez les <a href="#">emplacements</a> sur notre site.</h2>
+                <h2>2. Choissisez les <a href="{{ path('advertiser_spaces') }}">emplacements</a> sur notre site.</h2>
 
                 <p class="lead">Définissez le nombre de clic ou le nombre de vue, activez ou désactivez votre campagne
                     quand bon vous semble.</p>

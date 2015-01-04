@@ -1,7 +1,18 @@
 {% extends '::advertiser.html.twig' %}
 
+{# entity \Walva\AdSiteBundle\Entity\Space #}
+
+{% block css %}
+    {{ parent() }}
+
+{% endblock %}
+
+
+
 
 {% block content %}
+    {% set spaces = entities %}
+    {% set spaces_content_light = false %}
 
     <div class="container">
         <div class="row">
@@ -9,7 +20,7 @@
                 <h1>Liste des espaces disponibles sur le site</h1>
                 <hr>
                 <dl class="dl-horizontal">
-                    {% for entity in entities %}
+                    {% for entity in spaces %}
 
                         <dt>{{ entity.name }}</dt>
                         <dd>{{ entity.format }}</dd>
@@ -18,62 +29,8 @@
                 {% include '@WalvaAdSite/Advertiser/Components/info_want_more.html.twig' %}
             </div>
         </div>
-
-        {#<div class="row">#}
-        {#<div class="col-sm-4">#}
-        {#<h3><span class="glyphicon glyphicon-info-sign"></span> A voir aussi</h3>#}
-        {#<p></p>#}
-        {#</div>#}
-        {#</div>#}
-
-        <div class="row">
-            <div class="col-sm-12">
-
-                <hr>
-                {% for entity in entities %}
-
-                    <h3>{{ entity.name }}</h3>
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <div class="row">
-                                {% for i in 1..2 %}
-                                    <div class="col-xs-12 col-md-6">
-                                        <a href="#" class="thumbnail">
-                                            <img data-src="holder.js/100%x180" alt="...">
-                                        </a>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-
-                            <dl class="">
-
-                                <dt>Hauteur</dt>
-                                <dd>160</dd>
-
-                                <dt>Largeur</dt>
-                                <dd>600</dd>
-                                <dt>Example</dt>
-                                <dd>page 1, page 2, page 3</dd>
-                                <dt>Prix</dt>
-                                <dd><ul class="list-unstyled">
-                                        <li>par clic : 1€</li>
-                                        <li>par 1000 vues : 5€ </li>
-                                    </ul> </dd>
-
-                            </dl>
-
-                        </div>
-                    </div>
-
-                {% endfor %}
-
-            </div>
-        </div>
-
+        {{ include('@WalvaAdSite/Advertiser/spaces_content.html.twig') }}
     </div>
 
-
-
 {% endblock content %}
+

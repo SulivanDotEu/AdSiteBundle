@@ -1,45 +1,33 @@
 {% extends '::advertiser.html.twig' %}
 
-
 {% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Liste des formats supportés par les espaces disponibles sur le site</h1>
+            <hr>
+            <div class="row">
+                <div class="col-sm-6">
+                    <dl class="dl-horizontal">
+                        {% for entity in entities %}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <h1>Liste des formats supportés par les espaces disponibles sur le site</h1>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <dl class="dl-horizontal">
-                            {% for entity in entities %}
-
-                                <dt>{{ entity.name }}</dt>
-                                <dd>{{ entity }}</dd>
-                            {% endfor %}
-                        </dl>
-                    </div>
-                    <div class="col-sm-6">
-                        <p>Les valeurs sont exprimées en pixel sous le format <code>[ largeur ] x [ hauteur ]</code>.</p>
-                    </div>
+                            <dt>{{ entity.name }}</dt>
+                            <dd>{{ entity }}</dd>
+                        {% endfor %}
+                    </dl>
                 </div>
-                <div class="alert alert-info" role="alert"><strong>Formats et espaces publicitaires</strong> Pour
-                    information, Il nous est possible de vous proposer d'avantage
-                    de format et d'espaces publicitaires sur notre site. Pour cela, n'hésitez pas à nous
-                    <a href="{{ path('haf_contact', {'langue' : 'fr'}) }}">contacter</a>.
+                <div class="col-sm-6">
+                    <p>Les valeurs sont exprimées en pixel sous le format <code>[ largeur ] x [ hauteur ]</code>.</p>
                 </div>
             </div>
+            {% include '@WalvaAdSite/Advertiser/Components/info_want_more.html.twig' %}
         </div>
-
-        <div class="row">
-            <div class="col-sm-4">
-                <h3><span class="glyphicon glyphicon-info-sign"></span> A voir aussi</h3>
-
-                <p></p>
-            </div>
-        </div>
-
     </div>
 
+    <div class="row">
+        <div class="col-sm-4">
+            <h3><span class="glyphicon glyphicon-info-sign"></span> A voir aussi</h3>
 
-
+            <p></p>
+        </div>
+    </div>
 {% endblock content %}

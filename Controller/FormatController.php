@@ -34,6 +34,7 @@ class FormatController extends Controller
         $this->setIndexPath("WalvaAdSiteBundle:Format:index.html.twig");
         $this->setShowPath("WalvaAdSiteBundle:Format:show.html.twig");
         $this->setEditPath("WalvaAdSiteBundle:Format:edit.html.twig");
+        $this->setNewPath("WalvaAdSiteBundle:Format:new.html.twig");
 
         $this->setColumnsHeader(
             array(

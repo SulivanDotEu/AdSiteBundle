@@ -1,6 +1,8 @@
-{% extends '::base.html.twig' %}
+{% extends  'WalvaCrudAdminBundle:Crud:new.html.twig' %}
 
-{% block body -%}
+{% form_theme form '@WalvaAdSite/Form/bootstrap_3_horizontal_layout.html.twig' %}
+
+{% block content %}
     <h1>Space creation</h1>
 
     {{ form(form) }}

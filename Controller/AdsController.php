@@ -31,6 +31,7 @@ function __construct() {
     $this->setIndexPath("WalvaAdSiteBundle:Ads:index.html.twig");
     $this->setShowPath("WalvaAdSiteBundle:Ads:show.html.twig");
     $this->setEditPath("WalvaAdSiteBundle:Ads:edit.html.twig");
+    $this->setNewPath("WalvaAdSiteBundle:Ads:new.html.twig");
 
     $this->setColumnsHeader(array(
         "Id",
